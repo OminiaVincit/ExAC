@@ -13,7 +13,7 @@ ExAC
 * 9,462,741 variation places
 * Filter: DP >= 10 & GQ >= 20
 * 2.9GB (gzip)
-
+aaaaaaaaaaaaaa
 # The VCF specification (v4.1)
 
 * https://github.com/OminiaVincit/ExAC/blob/master/ref_files/VCFv4.1.pdf
