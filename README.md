@@ -15,7 +15,7 @@ About ExAC database
 
 The VCF specification (v4.1)
 ============================
-*
+* https://github.com/OminiaVincit/ExAC/blob/master/ref_files/VCFv4.1.pdf
 
 Sample program (getExAC.pl)
 ===========================
@@ -27,11 +27,11 @@ Sample program (getExAC.pl)
 Improvements
 ============
 * Modify ExAC data
-- Extract file with necessary columns only
-- Add index, parallel processing for read/write
+** Extract file with necessary columns only
+** Add index, parallel processing for read/write
 * Improve program
-- Parallel processing for perl thread
-- Implement by C, C++, Java
+** Parallel processing for perl thread
+** Implement by C, C++, Java
 * USE JAVA 
 
 5000 people Exome data (different projects)
