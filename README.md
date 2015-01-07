@@ -35,7 +35,13 @@ ExAC
 * Parallel processing for perl thread
 * Implement by C, C++, Java
 
-## USE JAVA 
+## Use Java 
+
+# Development plan
+
+* Create small sample ExAC VCF file  
+* Read/write this small sample file, import to hash-table (Java)
+* Import to pipeline & test
 
 # 5000 people Exome data (different projects)
 
