@@ -30,9 +30,11 @@ ExAC
 ## Modify ExAC data
 * Extract file with necessary columns only
 * Add index, parallel processing for read/write
+
 ## Improve program
 * Parallel processing for perl thread
 * Implement by C, C++, Java
+
 ## USE JAVA 
 
 # 5000 people Exome data (different projects)
