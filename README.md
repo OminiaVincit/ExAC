@@ -1,8 +1,9 @@
 ExAC
 =========
-Change from master!!!
-
+Change from master
 Change from upstream for saito test
+Create branch genomecenter
+
 # ExAC Overview
 
 * This project is developed for importing ExAC data to pipeline.
