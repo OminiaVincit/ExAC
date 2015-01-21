@@ -25,9 +25,28 @@ aaaaaaaaaaaaaa
 
 * Read VCFfile for each line
 * Import chr, pos, alt, AC, AC_EAS, AN, AN_EAS to hash-table (key: chr, pos)
-* From each sample, get SNV positions VCF file. Read this file for each line and search in ExAC hash table with (chr, pos) key. If search item is hitted, then add alt:AC, AC_EAS, AN, AN_EAS to the end of this line.
+* From each sample, get SNV positions VCF file. Read this file for each line and search in ExAC hash table with (chr, pos) key. If search item is hitted, then add alt:AC, AC_EAS, AN, AN_EAS to VCF file.
 * Problem: it takes about 15 mins to read ExAC VCF file (on RAM disk)
+* Usage: getExAc.pl <vcf file> <ExAC file>
 
+* How to make vcf data for test
+$ curl -s "http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/pgVenter.txt.gz" |\
+gunzip -c |\
+awk 'BEGIN { printf("#CHROM\tPOS\tID\tREF\tALT\n");} { printf("%s\t%d\t.\t.\t%s\n",$2,1+int($3),$5);}'
+
+CHROM  POS ID  REF ALT
+chr1    65745   .   .   G
+chr1    65797   .   .   C
+chr1    65872   .   .   G
+chr1    66008   .   .   G
+chr1    66162   .   .   T
+chr1    66258   .   .   G
+chr1    66275   .   .   T
+chr1    66294   .   .   TA/AT
+chr1    66312   .   .   T
+chr1    566139  .   .   A/C
+(...)
+	
 # Improvements
 
 ## Modify ExAC data
