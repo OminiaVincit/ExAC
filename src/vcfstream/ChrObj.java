@@ -1,6 +1,7 @@
 package vcfstream;
+import java.io.Serializable;
 
-public class ChrObj {
+public class ChrObj implements Serializable {
 	String chr;
 	String pos;
 	public ChrObj( String chr, String pos ) {
