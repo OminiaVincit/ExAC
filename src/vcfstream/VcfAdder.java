@@ -41,12 +41,12 @@ public class VcfAdder {
 					else if ( chr.equals("Y") ) cur_chr = 24;
 					else cur_chr = prev_chr;
 				} 
-				
+				if (cur_chr == 10) break;
 				// Clear map and re-mapping if chromosome index has been changed
 				if ( cur_chr != prev_chr ){
 					readmap.clear();
 					try {
-						FileInputStream fis = new FileInputStream("hashmap_file/"+"hashmap"+chr+".ser");
+						FileInputStream fis = new FileInputStream("/Users/zoro/work/Genome/ExACdata/hashmap_file/"+"hashmap"+chr+".ser");
 						ObjectInputStream ois = new ObjectInputStream(fis);
 						readmap = (HashMap) ois.readObject();
 						ois.close();
