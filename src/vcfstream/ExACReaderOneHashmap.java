@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExACReader {
+public class ExACReaderOneHashmap {
 	public static void main(final String args[]) {
 		final long startTime = System.currentTimeMillis();
 
@@ -22,10 +22,8 @@ public class ExACReader {
 		final File file = new File(ExAC_FILE);
 
 		try {
-			// Read ExAC file into 24 hashmap file
+			// Read ExAC file into one large hashmap file
 			final HashMap<String, String> map = new HashMap<String, String>();
-			int prev_chr = 1;
-
 			final BufferedReader br = new BufferedReader(new FileReader(file));
 			for (String line; (line = br.readLine()) != null;) {
 				if (line.startsWith("#"))
@@ -41,63 +39,34 @@ public class ExACReader {
 				final String pos = parts[1];
 				final String alt = parts[4];
 				final String info = parts[7];
-				String info_txt = alt + ":";
-
+				String info_txt = String.format("%s:", alt);
+				final String chr = String.format("chr%s", parts[0]); 
 				final String info_parts[] = info.split(";");
 				for (int i = 0; i < info_parts.length; i++) {
 					final String kvls[] = info_parts[i].split("=");
 					if (KEYWORDS.contains(kvls[0])) {
-						info_txt += info_parts[i] + ",";
+						info_txt = String.format("%s%s,",info_txt,info_parts[i]);
 					}
 				}
 				// Remove last comma in info_txt
 				if (info_txt.endsWith(",")) {
 					info_txt = info_txt.substring(0, info_txt.length() - 1);
 				}
-
-				// Write to hashmap file if finish one type of chr
-				int cur_chr = 1;
-				if ( parts[0].equals("X") ) cur_chr = 23;
-				else if ( parts[0].equals("Y") ) cur_chr = 24;
-				else cur_chr = Integer.parseInt(parts[0]);
-					
-				if ( cur_chr != prev_chr ) {
-					// Output serialize hashmap
-					final String OutFileName = "hashmap"
-							+ prev_chr + ".ser";
-					final FileOutputStream fos = new FileOutputStream(OutFileName);
-					final ObjectOutputStream oos = new ObjectOutputStream(fos);
-					oos.writeObject(map);
-					oos.close();
-					fos.close();
-					System.out
-							.println("Seriazlized HashMap data is save in " + OutFileName );
-
-					// Clear hashmap to free heap space memory
-					map.clear();
-					prev_chr = cur_chr;
-				} else {
-					// Put into map
-					//final ChrObj chrpos = new ChrObj(parts[0], pos);
-					map.put(pos, info_txt);
-				}
 				
-				System.out.println("chr" + parts[0] + "\t" + pos + "\t" + info_txt);
+				//final ChrObj chrpos = new ChrObj(chr, pos);
+				final String chrpos = String.format("%s%s",chr,pos);
+				map.put(chrpos, info_txt);				
+				System.out.println(chr + "\t" + pos + "\t" + info_txt);
 			}
 			br.close();
 			// Output serialize hashmapY
-			final String OutFileName = "hashmap"
-					+ "Y" + ".ser";
+			final String OutFileName = "hashmap.ser";
 			final FileOutputStream fos = new FileOutputStream(OutFileName);
 			final ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(map);
 			oos.close();
 			fos.close();
-			System.out
-					.println("Seriazlized HashMap data is save in " + OutFileName );
-
-			// Clear hashmap to free heap space memory
-			map.clear();
+			System.out.println("Seriazlized HashMap data is save in " + OutFileName );
 			
 		} catch (final FileNotFoundException e) {
 			// TODO Auto-generated catch block
